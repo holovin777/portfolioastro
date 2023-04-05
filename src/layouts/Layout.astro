@@ -17,7 +17,7 @@ const customer = await response.json();
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} - FirstName LastName</title>
+    <title>{title} - {customer.firstName} {customer.lastName}</title>
 </head>
 <body>
 <nav class="top">
@@ -30,7 +30,7 @@ const customer = await response.json();
                 <summary aria-haspopup="listbox" role="link">Menu</summary>
                 <ul role="listbox">
                     <li><a href="/">Home</a></li>
-                    <li><a href="workingexperiences">Working experiances</a></li>
+                    <li><a href="working-experiences">Working experiances</a></li>
                 </ul>
             </details>
         </li>
@@ -51,10 +51,16 @@ const customer = await response.json();
     }
     nav.top {
         background-color: #001f29;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     a.brand {
         color: #039be5;
+    }
+    h1.title {
+        text-align: center;
+    }
+    h3.card-title {
+        margin-bottom: 0;
     }
 </style>

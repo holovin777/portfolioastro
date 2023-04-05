@@ -34,9 +34,9 @@ qualifications.map(qualification => {
                         <div>{qualification.department}</div>
                 }
                 <footer  dir="rtl">
-                    <div>Started working in {qualification.startedStudying}</div>
-                    {qualification.finishedWork !== null &&
-                            <div>Finished working in {qualification.finishedStudying}</div>
+                    <div>Started studying in {qualification.startedStudying}</div>
+                    {qualification.finishedStudying !== null &&
+                            <div>Finished studying in {qualification.finishedStudying}</div>
                     }
                 </footer>
             </article>

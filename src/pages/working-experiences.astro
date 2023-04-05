@@ -14,6 +14,7 @@ const workingExperiences = await response.json();
     </nav>
     <h1 class="title">Working experiences</h1>
 
+        <div class="grid">
     {workingExperiences.map(workingExperience =>
             <article key={workingExperience.id}>
                 <header><h3 class="card-title">{workingExperience.positionAtWork.name}</h3></header>
@@ -28,4 +29,5 @@ const workingExperiences = await response.json();
             </article>
     )
     }
+            </div>
 </Layout>

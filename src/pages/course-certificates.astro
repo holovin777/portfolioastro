@@ -21,6 +21,7 @@ qualifications.map(qualification => {
     </nav>
     <h1 class="title">Course certificates</h1>
 
+    <div class="grid">
     {qualificationsToShow.map(qualification =>
             <article key={qualification.id}>
                 <header><h3 class="card-title">{qualification.course.name}</h3></header>
@@ -33,4 +34,5 @@ qualifications.map(qualification => {
             </article>
     )
     }
+        </div>
 </Layout>

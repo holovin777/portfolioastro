@@ -15,7 +15,7 @@ const workingExperiences = await response.json();
     <h1 class="title">Working experiences</h1>
 
     {workingExperiences.map(workingExperience =>
-            <article>
+            <article key={workingExperience.id}>
                 <header><h3 class="card-title">{workingExperience.positionAtWork.name}</h3></header>
                 <div><h4>"{workingExperience.company.name}"</h4></div>
                 <div>🗺 {workingExperience.company.location}</div>

@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const response = await fetch(`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}/working-experience/all`);
+const workingExperiences = await response.json();
+---
+
+<Layout title="Working experiences">
+    <nav aria-label="breadcrumb">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li>Working experiences</li>
+        </ul>
+    </nav>
+    <h1 class="title">Working experiences</h1>
+
+    {workingExperiences.map(workingExperience =>
+            <article>
+                <header><h3 class="card-title">{workingExperience.positionAtWork.name}</h3></header>
+                <div><h4>"{workingExperience.company.name}"</h4></div>
+                <div>🗺 {workingExperience.company.location}</div>
+                <footer>
+                <div>Started working in {workingExperience.startedWork}</div>
+                {workingExperience.finishedWork !== null &&
+                        <div>Finished working in {workingExperience.finishedWork}</div>
+                }
+                </footer>
+            </article>
+    )
+    }
+</Layout>

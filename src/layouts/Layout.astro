@@ -1,0 +1,57 @@
+---
+export interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} - FirstName LastName</title>
+</head>
+<body>
+<nav class="top">
+    <ul>
+        <li><a class="brand" href="/"><strong>FirstName LastName</strong></a></li>
+    </ul>
+    <ul>
+        <li>
+            <details role="list" dir="rtl">
+                <summary aria-haspopup="listbox" role="link">Menu</summary>
+                <ul role="listbox">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="workingexperiences">Working experiances</a></li>
+                </ul>
+            </details>
+        </li>
+    </ul>
+</nav>
+<main class="container-fluid">
+    <slot />
+</main>
+</body>
+</html>
+<style is:global>
+    [data-theme=dark] {
+        background-color: #000000;
+    }
+    body>main {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    nav.top {
+        background-color: #001f29;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    a.brand {
+        color: #039be5;
+    }
+</style>

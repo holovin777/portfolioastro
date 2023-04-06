@@ -41,6 +41,7 @@ const customer = await response.json();
 <main class="container-fluid">
     <slot />
 </main>
+<footer class="page">{customer.firstName} {customer.lastName}</footer>
 </body>
 </html>
 <style is:global>
@@ -67,6 +68,10 @@ const customer = await response.json();
         text-align: center;
     }
     .grid {
-        grid-template-columns: repeat(auto-fit,minmax(480px ,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(350px ,1fr));
+    }
+    footer.page {
+        text-align: center;
+        padding-bottom: 20px;
     }
 </style>

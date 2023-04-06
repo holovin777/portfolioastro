@@ -19,7 +19,7 @@ const workingExperiences = await response.json();
             <article key={workingExperience.id}>
                 <header><h3 class="card-title">{workingExperience.positionAtWork.name}</h3></header>
                 <div><h4>"{workingExperience.company.name}"</h4></div>
-                <div>🗺 {workingExperience.company.location}</div>
+                <div>🌍 {workingExperience.company.location}</div>
                 <footer  dir="rtl">
                 <div>Started working in {workingExperience.startedWork}</div>
                 {workingExperience.finishedWork !== null &&

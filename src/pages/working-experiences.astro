@@ -1,7 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-const response = await fetch(`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}/working-experience/all`);
+const response = await fetch(
+    `${import.meta.env.API_ADDRESS}/customer/${
+        import.meta.env.CUSTOMER_ID
+    }/working-experience/all`
+);
 const workingExperiences = await response.json();
 ---
 
@@ -14,20 +18,32 @@ const workingExperiences = await response.json();
     </nav>
     <h1 class="title">Working experiences</h1>
 
-        <div class="grid">
-    {workingExperiences.map(workingExperience =>
-            <article key={workingExperience.id}>
-                <header><h3 class="card-title">{workingExperience.positionAtWork.name}</h3></header>
-                <div><h4>"{workingExperience.company.name}"</h4></div>
-                <div>🌍 {workingExperience.company.location}</div>
-                <footer  dir="rtl">
-                <div>Started working in {workingExperience.startedWork}</div>
-                {workingExperience.finishedWork !== null &&
-                        <div>Finished working in {workingExperience.finishedWork}</div>
-                }
-                </footer>
-            </article>
-    )
-    }
-            </div>
+    <div class="grid">
+        {
+            workingExperiences.map((workingExperience: any) => (
+                <article>
+                    <header>
+                        <h3 class="card-title">
+                            {workingExperience.positionAtWork.name}
+                        </h3>
+                    </header>
+                    <div>
+                        <h4>"{workingExperience.company.name}"</h4>
+                    </div>
+                    <div>🌍 {workingExperience.company.location}</div>
+                    <footer dir="rtl">
+                        <div>
+                            Started working in {workingExperience.startedWork}
+                        </div>
+                        {workingExperience.finishedWork !== null && (
+                            <div>
+                                Finished working in{" "}
+                                {workingExperience.finishedWork}
+                            </div>
+                        )}
+                    </footer>
+                </article>
+            ))
+        }
+    </div>
 </Layout>

@@ -1,13 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-const response = await fetch(`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}/qualification/all`);
+const response = await fetch(
+    `${import.meta.env.API_ADDRESS}/customer/${
+        import.meta.env.CUSTOMER_ID
+    }/qualification/all`
+);
 const qualifications = await response.json();
 
-const qualificationsToShow = []
-qualifications.map(qualification => {
+const qualificationsToShow: any[] = [];
+qualifications.map((qualification: any) => {
     if (qualification.educationalInstitution.studyPlace === "COURSE") {
-        qualificationsToShow.push(qualification)
+        qualificationsToShow.push(qualification);
     }
 });
 ---
@@ -22,17 +26,23 @@ qualifications.map(qualification => {
     <h1 class="title">Course certificates</h1>
 
     <div class="grid">
-    {qualificationsToShow.map(qualification =>
-            <article key={qualification.id}>
-                <header><h3 class="card-title">{qualification.course.name}</h3></header>
-                <h3>"{qualification.educationalInstitution.name}"</h3>
-                <footer  dir="rtl">
-                    {qualification.finishedStudying !== null &&
-                            <div>Finished studying in {qualification.finishedStudying}</div>
-                    }
-                </footer>
-            </article>
-    )
-    }
-        </div>
+        {
+            qualificationsToShow.map((qualification) => (
+                <article>
+                    <header>
+                        <h3 class="card-title">{qualification.course.name}</h3>
+                    </header>
+                    <h3>"{qualification.educationalInstitution.name}"</h3>
+                    <footer dir="rtl">
+                        {qualification.finishedStudying !== null && (
+                            <div>
+                                Finished studying in{" "}
+                                {qualification.finishedStudying}
+                            </div>
+                        )}
+                    </footer>
+                </article>
+            ))
+        }
+    </div>
 </Layout>

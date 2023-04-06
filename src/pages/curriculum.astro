@@ -1,0 +1,213 @@
+---
+import CurriculumLayout from "../layouts/CurriculumLayout.astro";
+
+const responseCustomer = await fetch(
+    `${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`
+);
+const customer = await responseCustomer.json();
+
+const responseWorkingExperiences = await fetch(
+    `${import.meta.env.API_ADDRESS}/customer/${
+        import.meta.env.CUSTOMER_ID
+    }/working-experience/all`
+);
+const workingExperiences = await responseWorkingExperiences.json();
+
+const responseQualifications = await fetch(
+    `${import.meta.env.API_ADDRESS}/customer/${
+        import.meta.env.CUSTOMER_ID
+    }/qualification/all`
+);
+const qualifications = await responseQualifications.json();
+
+const academicDegrees: any[] = [];
+qualifications.map((qualification: { academicDegree: string }) => {
+    if (qualification.academicDegree !== null) {
+        academicDegrees.push(qualification);
+    }
+});
+
+const courseCertificates: any[] = [];
+qualifications.map(
+    (qualification: { educationalInstitution: { studyPlace: string } }) => {
+        if (qualification.educationalInstitution.studyPlace === "COURSE") {
+            courseCertificates.push(qualification);
+        }
+    }
+);
+---
+
+<CurriculumLayout>
+    <h1 class="title">Curriculum vitae</h1>
+
+    <article>
+        <header><h2>Contact info</h2></header>
+
+        <figure>
+            <table role="grid">
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>{customer.firstName} {customer.lastName}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Birthday</th>
+                    <td>{customer.birthday}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone number</th>
+                    <td>{customer.phoneNumber}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{customer.email}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Website</th>
+                    <td><a>{customer.website}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">Residence</th>
+                    <td>{customer.residence}</td>
+                </tr>
+            </table>
+        </figure>
+    </article>
+
+    <article>
+        <header><h2>Working experiences</h2></header>
+
+        <figure>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th scope="col">Position at work</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Started working</th>
+                        <th scope="col">Finished working</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        workingExperiences.map(
+                            (workingExperience: {
+                                positionAtWork: { name: string };
+                                company: { name: string, location: string };
+                                startedWork: string;
+                                finishedWork: string;
+                            }) => (
+                                <tr>
+                                    <td>
+                                        {workingExperience.positionAtWork.name}
+                                    </td>
+                                    <td>{workingExperience.company.name}</td>
+                                    <td>{workingExperience.company.location}</td>
+                                    <td>{workingExperience.startedWork}</td>
+                                    <td>{workingExperience.finishedWork}</td>
+                                </tr>
+                            )
+                        )
+                    }
+                </tbody>
+            </table>
+        </figure>
+    </article>
+
+    <article>
+        <header><h2>Academic degrees</h2></header>
+
+        <figure>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th scope="col">Academic degree</th>
+                        <th scope="col">Speciality</th>
+                        <th scope="col">Faculty</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Started studying</th>
+                        <th scope="col">Finished studying</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        academicDegrees.map(
+                            (academicDegree: {
+                                academicDegree: string;
+                                speciality: string;
+                                faculty: string;
+                                educationalInstitution: {location: string};
+                                startedStudying: string;
+                                finishedStudying: string;
+                            }) => (
+                                <tr>
+                                    <td>{academicDegree.academicDegree}</td>
+                                    <td>{academicDegree.speciality}</td>
+                                    <td>{academicDegree.faculty}</td>
+                                    <td>{academicDegree.educationalInstitution.location}</td>
+                                    <td>{academicDegree.startedStudying}</td>
+                                    <td>{academicDegree.finishedStudying}</td>
+                                </tr>
+                            )
+                        )
+                    }
+                </tbody>
+            </table>
+        </figure>
+    </article>
+
+    <article>
+        <header><h2>Course certificates</h2></header>
+
+        <figure>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th scope="col">Course name</th>
+                        <th scope="col">Course brand</th>
+                        <th scope="col">Finished studying</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        courseCertificates.map(
+                            (courseCertificate: {
+                                course: { name: string };
+                                educationalInstitution: { name: string };
+                                finishedStudying: string;
+                            }) => (
+                                <tr>
+                                    <td>{courseCertificate.course.name}</td>
+                                    <td>
+                                        {
+                                            courseCertificate
+                                                .educationalInstitution.name
+                                        }
+                                    </td>
+                                    <td>
+                                        {courseCertificate.finishedStudying}
+                                    </td>
+                                </tr>
+                            )
+                        )
+                    }
+                </tbody>
+            </table>
+        </figure>
+    </article>
+
+    Autorizzo il trattamento dei dati personali contenuti nel mio curriculum
+    vitae in base all’art. 13 del D. Lgs. 196/2003 e all’art. 13 del Regolamento
+    UE 2016/679 relativo alla protezione delle persone fisiche con riguardo al
+    trattamento dei dati personali.
+</CurriculumLayout>
+
+<style>
+    h1.title {
+        text-align: center;
+    }
+    h1,
+    h2,
+    figure {
+        margin-bottom: 0px;
+    }
+</style>

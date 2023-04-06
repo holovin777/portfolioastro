@@ -5,51 +5,71 @@ export interface Props {
 
 const { title } = Astro.props;
 
-const response = await fetch(`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`);
+const response = await fetch(
+    `${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`
+);
 const customer = await response.json();
 ---
 
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title} - {customer.firstName} {customer.lastName}</title>
-</head>
-<body>
-<nav class="top">
-    <ul>
-        <li><a class="brand" href="/"><strong>{customer.firstName} {customer.lastName}</strong></a></li>
-    </ul>
-    <ul>
-        <li>
-            <details role="list" dir="rtl">
-                <summary aria-haspopup="listbox" role="link">Menu</summary>
-                <ul role="listbox">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="working-experiences">Working experiances</a></li>
-                    <li><a href="/academic-degrees">Academic degrees</a></li>
-                    <li><a href="/course-certificates">Course certificates</a></li>
-                    <li><a href="/contact-info">Contact info</a></li>
-                </ul>
-            </details>
-        </li>
-    </ul>
-</nav>
-<main class="container-fluid">
-    <slot />
-</main>
-<footer class="page">{customer.firstName} {customer.lastName}</footer>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title} - {customer.firstName} {customer.lastName}</title>
+    </head>
+    <body>
+        <nav class="top">
+            <ul>
+                <li>
+                    <a class="brand" href="/"
+                        ><strong
+                            >{customer.firstName} {customer.lastName}</strong
+                        ></a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <details role="list" dir="rtl">
+                        <summary aria-haspopup="listbox" role="link"
+                            >Menu</summary
+                        >
+                        <ul role="listbox">
+                            <li><a href="/">Home</a></li>
+                            <li>
+                                <a href="working-experiences"
+                                    >Working experiances</a>
+                            </li>
+                            <li>
+                                <a href="/academic-degrees">Academic degrees</a>
+                            </li>
+                            <li>
+                                <a href="/course-certificates"
+                                    >Course certificates</a>
+                            </li>
+                            <li><a href="/contact-info">Contact info</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+        <main class="container-fluid">
+            <slot />
+        </main>
+        <footer class="page">{customer.firstName} {customer.lastName}</footer>
+    </body>
 </html>
 <style is:global>
-    [data-theme=dark] {
+    [data-theme="dark"] {
         background-color: #000000;
     }
-    body>main {
+    body > main {
         padding-top: 5px;
         padding-bottom: 5px;
     }
@@ -69,7 +89,7 @@ const customer = await response.json();
         text-align: center;
     }
     .grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px ,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
     footer.page {
         text-align: center;

@@ -1,12 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-const response = await fetch(`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`);
+const response = await fetch(
+	`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`
+);
 const customer = await response.json();
 ---
 
 <Layout title="Contact info">
-
 	<nav aria-label="breadcrumb">
 		<ul>
 			<li><a href="/">Home</a></li>
@@ -14,13 +15,14 @@ const customer = await response.json();
 		</ul>
 	</nav>
 
-		<h1 class="title">Contact info</h1>
+	<h1 class="title">Contact info</h1>
 	<article>
-	<div>{customer.firstName} {customer.lastName}</div>
-	<div>☎️ <a href=`tel:${customer.phoneNumber}`>{customer.phoneNumber}</a></div>
-	<div>✉️ {customer.email}</div>
-	<div><a>{customer.website}</a></div>
-	<div>🌍 {customer.residence}</div>
-		</article>
-
+		<div>{customer.firstName} {customer.lastName}</div>
+		<div>
+			☎️ {customer.phoneNumber}
+		</div>
+		<div>✉️ {customer.email}</div>
+		<div><a>{customer.website}</a></div>
+		<div>🌍 {customer.residence}</div>
+	</article>
 </Layout>

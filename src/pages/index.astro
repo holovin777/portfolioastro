@@ -1,7 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-const response = await fetch(`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`);
+const response = await fetch(
+	`${import.meta.env.API_ADDRESS}/customer/${import.meta.env.CUSTOMER_ID}`
+);
 const customer = await response.json();
 ---
 
@@ -11,8 +13,8 @@ const customer = await response.json();
 			<li><a href="/">Home</a></li>
 		</ul>
 	</nav>
+	<hgroup>
 		<h1>{customer.desiredProfession}</h1>
-		<p>
-			{customer.description}
-		</p>
+		<h1>{customer.description}</h1>
+	</hgroup>
 </Layout>

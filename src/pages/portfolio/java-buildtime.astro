@@ -1,13 +1,48 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const api = `${import.meta.env.PUBLIC_API_URL}/api/v1/customer/${import.meta.env.PUBLIC_CUSTOMER_ID}`;
-const res = await fetch(api, { headers: { Accept: "application/json" }});
-const customer = await res.json();
+
+// If you want *request-time* fetch (safer if API might be down), uncomment:
+// export const prerender = false;
+
+const base = import.meta.env.PUBLIC_API_URL;
+const id = import.meta.env.PUBLIC_CUSTOMER_ID;
+
+let customer: unknown = null;
+let error: string | null = null;
+
+if (base && id) {
+  try {
+    const res = await fetch(`${base}/api/v1/customer/${id}`, {
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    customer = await res.json();
+  } catch (e) {
+    error = String(e);
+  }
+} else {
+  error = "Missing PUBLIC_API_URL or PUBLIC_CUSTOMER_ID";
+}
 ---
 <BaseLayout title="Astro + Java API (Build-time)">
-  <section class="prose max-w-3xl mx-auto py-14">
+  <section class="prose prose-invert max-w-3xl mx-auto py-14">
     <h1>Astro + Java API (Build-time)</h1>
-    <p>This page is statically generated using data fetched from my Java backend during the build.</p>
-    <pre><code>{JSON.stringify(customer, null, 2)}</code></pre>
+    <p>
+      This page is generated using data fetched from my Java backend during the
+      {import.meta.prerender ? " build" : " request"}.
+    </p>
+
+    <p><strong>API base:</strong> {base ?? "—"}</p>
+
+    {error ? (
+      <>
+        <p><strong>Note:</strong> {error}. Rendering without API data.</p>
+        <p>
+          Example endpoint: <code>/api/v1/customer/{id ?? "..."}</code>
+        </p>
+      </>
+    ) : (
+      <pre><code>{JSON.stringify(customer, null, 2)}</code></pre>
+    )}
   </section>
 </BaseLayout>

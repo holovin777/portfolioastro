@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const upworkUrl = "https://www.upwork.com/freelancers/~017c0f9f0d7677c477";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Static Site Developer — Viktor Holovin" description="I build ultra-fast static websites with Astro.">
+  <!-- Hero -->
+  <section class="max-w-6xl mx-auto py-20 md:py-28">
+    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+      Static Site Developer — <span class="text-accent">Fast</span>. Secure. SEO-Ready.
+    </h1>
+
+    <p class="mt-4 text-lg md:text-2xl/relaxed opacity-90 max-w-3xl">
+      I build ultra-fast static websites with <strong>Astro</strong> and <strong>Tailwind</strong>,
+      integrate your APIs, and deliver a clean, professional experience that converts.
+    </p>
+
+    <div class="not-prose mt-10 flex flex-wrap gap-4">
+<a
+  href={upworkUrl}
+  class="inline-block rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 font-semibold text-white shadow hover:opacity-90 transition"
+>
+  Hire me on Upwork
+</a>
+      <a
+        href="/portfolio"
+        class="inline-block rounded-lg border border-white/20 px-5 py-2 text-base font-medium text-text hover:border-white/40 hover:text-accent transition"
+      >
+        See portfolio
+      </a>
+    </div>
+
+    <!-- Feature cards -->
+    <div class="mt-16 grid md:grid-cols-3 gap-8">
+      <div class="border border-white/15 rounded-2xl p-8 bg-white/5">
+        <h3 class="font-semibold">⚡ Performance</h3>
+        <p class="opacity-80 mt-2">Core Web Vitals friendly, CDN-ready, and caching done right.</p>
+      </div>
+      <div class="border border-white/15 rounded-2xl p-8 bg-white/5">
+        <h3 class="font-semibold">🔗 Integrations</h3>
+        <p class="opacity-80 mt-2">Java/Python/Node APIs baked in at build time or hydrated on demand.</p>
+      </div>
+      <div class="border border-white/15 rounded-2xl p-8 bg-white/5">
+        <h3 class="font-semibold">📈 SEO</h3>
+        <p class="opacity-80 mt-2">Structured data, clean HTML, great metadata, fast pages.</p>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="mt-16 prose prose-invert max-w-3xl">
+      <h2>What clients say</h2>
+      <blockquote>
+        “The website is insanely fast and stylish. Great communication, on time.” — Sample Client
+      </blockquote>
+    </div>
+  </section>
+</BaseLayout>

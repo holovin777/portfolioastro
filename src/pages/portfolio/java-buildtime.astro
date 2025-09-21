@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const api = `${import.meta.env.PUBLIC_API_URL}/api/v1/customer/${import.meta.env.PUBLIC_CUSTOMER_ID}`;
+const res = await fetch(api, { headers: { Accept: "application/json" }});
+const customer = await res.json();
+---
+<BaseLayout title="Astro + Java API (Build-time)">
+  <section class="prose max-w-3xl mx-auto py-14">
+    <h1>Astro + Java API (Build-time)</h1>
+    <p>This page is statically generated using data fetched from my Java backend during the build.</p>
+    <pre><code>{JSON.stringify(customer, null, 2)}</code></pre>
+  </section>
+</BaseLayout>

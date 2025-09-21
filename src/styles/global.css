@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@theme {
+  --color-bg: #0f172a;
+  --color-text: #f8fafc;
+  --color-accent: #6366f1; /* indigo */
+  --color-button: #e11d48; /* rose-600 */
+}
+
+:root { color-scheme: dark; }
+
+a:not(.bg-accent):not(.bg-button):not(.bg-gradient-to-r) {
+  color: var(--color-accent);
+}
+a:not(.bg-accent):not(.bg-button):not(.bg-gradient-to-r):hover {
+  text-decoration: underline;
+}

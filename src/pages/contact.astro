@@ -9,38 +9,31 @@ const sent = Astro.url.searchParams.get("sent") === "1";
     {sent ? (
       <p><strong>Thanks!</strong> Your message was sent. I’ll reply soon.</p>
     ) : (
-<form action="/api/contact" method="POST" class="flex flex-col gap-4 max-w-md">
-  <input
-    type="text"
-    name="name"
-    placeholder="Your name"
-    required
-    class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-  />
+      <>
+        <p>You can email me at <a href="mailto:viktor@holovin.com">viktor@holovin.com</a> or use the form:</p>
 
-  <input
-    type="email"
-    name="email"
-    placeholder="Your email"
-    required
-    class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-  />
+        <form action="/api/contact" method="POST" class="not-prose mt-6 flex flex-col gap-4 max-w-md">
+          <input
+            name="name" required placeholder="Your name"
+            class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          />
+          <input
+            type="email" name="email" required placeholder="Your email"
+            class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          />
+          <textarea
+            name="message" rows="5" required placeholder="Your message"
+            class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          ></textarea>
 
-  <textarea
-    name="message"
-    placeholder="Your message"
-    rows="5"
-    required
-    class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-  ></textarea>
+          <!-- Honeypot (spam trap) -->
+          <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
 
-  <button
-    type="submit"
-    class="rounded-lg bg-indigo-600 px-6 py-3 text-white font-medium hover:bg-indigo-700 transition"
-  >
-    Send Message
-  </button>
-</form>
+          <button class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium hover:opacity-90 transition">
+            Send Message
+          </button>
+        </form>
+      </>
     )}
   </section>
 </BaseLayout>

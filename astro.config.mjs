@@ -1,10 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
-import vercel from '@astrojs/vercel/serverless'
+import vercel from '@astrojs/vercel'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  output: 'server',       // SSR so actions can run
-  adapter: vercel(),      // deploy as Vercel serverless
+  output: 'server',
+  adapter: vercel(),
   vite: { plugins: [tailwindcss()] },
 })

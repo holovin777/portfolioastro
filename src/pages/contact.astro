@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { server } from "../actions";
+
 const sent = Astro.url.searchParams.get("sent") === "1";
 ---
+
 <BaseLayout title="Contact">
   <section class="prose prose-invert max-w-3xl mx-auto py-14">
     <h1>Contact Me</h1>
@@ -9,27 +12,53 @@ const sent = Astro.url.searchParams.get("sent") === "1";
     {sent ? (
       <p><strong>Thanks!</strong> Your message was sent. I’ll reply soon.</p>
     ) : (
-      <form action="/api/send" method="POST" class="not-prose mt-6 flex flex-col gap-4 max-w-md">
-        <input
-          name="name" required placeholder="Your name"
-          class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
-        <input
-          type="email" name="email" required placeholder="Your email"
-          class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
-        <textarea
-          name="message" rows="5" required placeholder="Your message"
-          class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        ></textarea>
+      <>
+        <p>You can email me at <a href="mailto:viktor@holovin.com">viktor@holovin.com</a> or use the form:</p>
 
-        <!-- honeypot -->
-        <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+        <!-- Post directly to the Astro Action -->
+        <form id="contactForm" method="POST" action={server.send} class="not-prose mt-6 flex flex-col gap-4 max-w-md">
+          <input
+            name="name" required placeholder="Your name"
+            class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+          <input
+            type="email" name="email" required placeholder="Your email"
+            class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+          <textarea
+            name="message" rows="5" required placeholder="Your message"
+            class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
 
-        <button class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium hover:opacity-90 transition">
-          Send Message
-        </button>
-      </form>
+          <!-- Honeypot -->
+          <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+
+          <button class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium hover:opacity-90 transition">
+            Send Message
+          </button>
+        </form>
+
+        <!-- Small progressive enhancement: after success, redirect to ?sent=1 -->
+        <script>
+          const f = document.getElementById('contactForm');
+          if (f) {
+            f.addEventListener('submit', async (e) => {
+              // Progressive enhancement: let JS handle submission to show success state
+              e.preventDefault();
+              const res = await fetch(f.action, { method: 'POST', body: new FormData(f) });
+              if (res.ok) {
+                // Astro Actions return JSON; check ok flag
+                try {
+                  const data = await res.json();
+                  if (data?.ok) window.location.href = '/contact?sent=1';
+                  else alert('Failed to send.');
+                } catch {
+                  window.location.href = '/contact?sent=1';
+                }
+              } else {
+                alert('Failed to send. Please try again.');
+              }
+            });
+          }
+        </script>
+      </>
     )}
   </section>
 </BaseLayout>

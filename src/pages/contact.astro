@@ -1,14 +1,46 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const upworkUrl = "https://www.upwork.com/freelancers/~017c0f9f0d7677c477";
+const sent = Astro.url.searchParams.get("sent") === "1";
 ---
-<BaseLayout title="Contact — Work with Viktor">
+<BaseLayout title="Contact">
   <section class="prose prose-invert max-w-3xl mx-auto py-14">
-    <h1>Contact</h1>
-    <p>Tell me about your project and timeline. I usually reply within 24 hours.</p>
-    <ul>
-      <li>Email: <a href="mailto:viktor@holovin.com">viktor@holovin.com</a></li>
-      <li>Upwork: <a href={upworkUrl}>Hire me on Upwork</a></li>
-    </ul>
+    <h1>Contact Me</h1>
+
+    {sent ? (
+      <p><strong>Thanks!</strong> Your message was sent. I’ll reply soon.</p>
+    ) : (
+<form action="/api/contact" method="POST" class="flex flex-col gap-4 max-w-md">
+  <input
+    type="text"
+    name="name"
+    placeholder="Your name"
+    required
+    class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+  />
+
+  <input
+    type="email"
+    name="email"
+    placeholder="Your email"
+    required
+    class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+  />
+
+  <textarea
+    name="message"
+    placeholder="Your message"
+    rows="5"
+    required
+    class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+  ></textarea>
+
+  <button
+    type="submit"
+    class="rounded-lg bg-indigo-600 px-6 py-3 text-white font-medium hover:bg-indigo-700 transition"
+  >
+    Send Message
+  </button>
+</form>
+    )}
   </section>
 </BaseLayout>

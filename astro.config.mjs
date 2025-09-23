@@ -1,11 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
+import vercel from '@astrojs/vercel/serverless'   // <-- add this
+import tailwindcss from '@tailwindcss/vite'
 
-import tailwindcss from '@tailwindcss/vite';
-
-// https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  }
-});
+  output: 'server',                 // <-- required for API routes
+  adapter: vercel(),                // <-- deploy as serverless functions on Vercel
+  vite: { plugins: [tailwindcss()] }
+})

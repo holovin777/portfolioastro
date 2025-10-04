@@ -15,7 +15,7 @@
      id="layer1"
      transform="translate(-29.401294,-18.710944)">
     <rect
-       style="fill:#000000;stroke-width:0.264583"
+       style="fill:#ffffff;stroke-width:0.264583"
        id="rect1"
        width="270.93332"
        height="270.93332"
@@ -23,12 +23,12 @@
        y="18.710943" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180.994px;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;text-align:start;letter-spacing:-18.9203px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#39ff14;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180.994px;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;text-align:start;letter-spacing:-18.9203px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#2563eb;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
        x="19.870203"
        y="206.22397"
        id="text1"><tspan
          id="tspan1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;letter-spacing:-18.9203px;fill:#39ff14;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;letter-spacing:-18.9203px;fill:#2563eb;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
          x="19.870203"
          y="206.22397">{h}</tspan></text>
   </g>

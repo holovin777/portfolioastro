@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1023.9999"
+   height="1023.9999"
+   viewBox="0 0 270.9333 270.9333"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="logolight.png"
+   inkscape:export-xdpi="93.75"
+   inkscape:export-ydpi="93.75"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="270.93329"
+       height="270.93329"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-29.401294,-18.710944)">
+    <rect
+       style="fill:#ffffff;stroke-width:0.264583"
+       id="rect1"
+       width="270.93332"
+       height="270.93332"
+       x="29.401295"
+       y="18.710943" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180.994px;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;text-align:start;letter-spacing:-18.9203px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#2563eb;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
+       x="19.870203"
+       y="206.22397"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;letter-spacing:-18.9203px;fill:#2563eb;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
+         x="19.870203"
+         y="206.22397">{h}</tspan></text>
+  </g>
+</svg>

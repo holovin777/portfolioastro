@@ -37,7 +37,7 @@ export async function POST({ request }: APIContext) {
       to,
       subject: 'New contact from holovin.com',
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-      reply_to: email,
+      replyTo: email,
     })
 
     if (error) {

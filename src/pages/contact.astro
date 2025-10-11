@@ -1,52 +1,101 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const API = "/api/contact"; // same-origin
+
+const API = `${import.meta.env.PUBLIC_URL}/api/contact`;
 ---
 
 <BaseLayout title="Contact">
   <section class="prose prose-invert max-w-3xl mx-auto py-14">
     <h1>Contact</h1>
-    <p>Or email me at <a href="mailto:viktor@holovin.com">viktor@holovin.com</a>.</p>
+    <p>
+      You can email me at
+      <a class="underline" href="mailto:viktor@holovin.com">viktor@holovin.com</a>
+      or use the form below:
+    </p>
 
-    <form id="contactForm" class="not-prose mt-6 flex flex-col gap-4 max-w-md">
-      <input name="name" required placeholder="Your name"
-             class="rounded-lg bg-white/5 px-4 py-2 border border-white/20" />
-      <input type="email" name="email" required placeholder="Your email"
-             class="rounded-lg bg-white/5 px-4 py-2 border border-white/20" />
-      <textarea name="message" rows="5" required placeholder="Your message"
-                class="rounded-lg bg-white/5 px-4 py-2 border border-white/20"></textarea>
+    <form
+      id="contactForm"
+      method="POST"
+      action={API}
+      class="not-prose mt-6 flex flex-col gap-4 max-w-md"
+    >
+      <input
+        name="name"
+        required
+        placeholder="Your name"
+        autocomplete="name"
+        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      />
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="Your email"
+        autocomplete="email"
+        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      />
+      <textarea
+        name="message"
+        rows="5"
+        required
+        placeholder="Your message"
+        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      ></textarea>
 
-      <!-- honeypot -->
-      <input type="text" name="company" class="hidden" autocomplete="off" />
+      <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
 
-      <button class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium">
+      <button
+        type="submit"
+        class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium hover:opacity-90 transition"
+      >
         Send
       </button>
-      <p id="status" class="text-sm opacity-80"></p>
+
+      <p id="status" class="text-sm opacity-80 min-h-[1.5em]"></p>
+      <noscript>
+        <p class="text-xs opacity-70">
+          JavaScript is disabled. After submitting you may see a raw API response.
+        </p>
+      </noscript>
     </form>
 
-    <script>
-      const f = document.getElementById('contactForm');
-      const status = document.getElementById('status');
-      f?.addEventListener('submit', async (e) => {
+    <script is:inline>
+      const API = {JSON.stringify(API)};
+      const form = document.getElementById('contactForm');
+      const statusEl = document.getElementById('status');
+
+      form?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        status.textContent = 'Sending...';
-        const payload = Object.fromEntries(new FormData(f));
+        if (!form || !statusEl) return;
+
+        statusEl.textContent = 'Sending…';
+        statusEl.style.color = '';
+
+        const payload = Object.fromEntries(new FormData(form));
+
         try {
-          const res = await fetch({API}, {
+          const res = await fetch(API, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
+
           if (res.ok) {
-            f.reset();
-            status.textContent = 'Thanks! I’ll reply soon.';
+            form.reset();
+            statusEl.textContent = '✅ Message sent! I’ll reply soon.';
+            statusEl.style.color = '#4ade80'; // green
           } else {
-            const { error } = await res.json().catch(()=>({ error: 'Failed' }));
-            status.textContent = 'Failed: ' + (error || 'Please try again.');
+            let msg = 'Please try again.';
+            try {
+              const data = await res.json();
+              if (data?.error) msg = data.error;
+            } catch {}
+            statusEl.textContent = '❌ Failed: ' + msg;
+            statusEl.style.color = '#f87171'; // red
           }
         } catch {
-          status.textContent = 'Network error. Please try again.';
+          statusEl.textContent = '⚠️ Network error. Please try again.';
+          statusEl.style.color = '#facc15'; // yellow
         }
       });
     </script>

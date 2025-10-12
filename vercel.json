@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/:path((?!api/).*)",
+      "destination": "https://www.holovin.com/:path",
+      "permanent": true
+    }
+  ]
+}

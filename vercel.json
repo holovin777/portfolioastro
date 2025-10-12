@@ -2,6 +2,7 @@
   "redirects": [
     {
       "source": "/:path((?!api/).*)",
+      "has": [{ "type": "host", "value": "holovin.com" }],
       "destination": "https://www.holovin.com/:path",
       "permanent": true
     }

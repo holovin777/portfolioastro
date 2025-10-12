@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "@astrojs/vercel": "^8.2.8",
-    "vercel": "^48.1.2"
+    "vercel": "^48.2.9"
   }
 }

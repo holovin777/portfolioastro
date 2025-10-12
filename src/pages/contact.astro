@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import contactScriptUrl from "../scripts/contact.ts?url";
 
 const API = "/api/contact";
 ---
@@ -8,25 +7,53 @@ const API = "/api/contact";
 <BaseLayout title="Contact">
   <section class="prose prose-invert max-w-3xl mx-auto py-14">
     <h1>Contact</h1>
-    <p>Or email me at <a class="underline" href="mailto:viktor@holovin.com">viktor@holovin.com</a>.</p>
+    <p>
+      Or email me at <a class="underline" href="mailto:viktor@holovin.com"
+        >viktor@holovin.com</a
+      >.
+    </p>
 
-    <form id="contactForm" class="not-prose mt-6 flex flex-col gap-4 max-w-md" novalidate data-api={API}>
-      <input name="name" required placeholder="Your name"
-             class="rounded-lg bg-white/5 px-4 py-2 border border-white/20" />
-      <input type="email" name="email" required placeholder="Your email"
-             class="rounded-lg bg-white/5 px-4 py-2 border border-white/20" />
-      <textarea name="message" rows="5" required placeholder="Your message"
-                class="rounded-lg bg-white/5 px-4 py-2 border border-white/20"></textarea>
+    <form
+      id="contactForm"
+      class="not-prose mt-6 flex flex-col gap-4 max-w-md"
+      novalidate
+      data-api={API}
+    >
+      <input
+        name="name"
+        required
+        placeholder="Your name"
+        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20"
+      />
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="Your email"
+        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20"
+      />
+      <textarea
+        name="message"
+        rows="5"
+        required
+        placeholder="Your message"
+        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20"
+      ></textarea>
 
       <input type="text" name="company" class="hidden" autocomplete="off" />
 
-      <button id="sendBtn" type="button"
-        class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium">
+      <button
+        id="sendBtn"
+        type="button"
+        class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium"
+      >
         Send
       </button>
       <p id="status" class="text-sm opacity-80 min-h-[1.5em]"></p>
     </form>
 
-    <script type="module" src={contactScriptUrl}></script>
+    <script type="module">
+      import "../scripts/contact.ts";
+    </script>
   </section>
 </BaseLayout>

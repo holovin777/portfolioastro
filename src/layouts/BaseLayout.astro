@@ -1,25 +1,41 @@
 ---
 import "../styles/global.css";
-const { title = "Static Site Developer", description = "Fast. Secure. SEO-ready." } = Astro.props;
+const {
+  title = "Static Site Developer",
+  description = "Fast. Secure. SEO-ready.",
+} = Astro.props;
 const upworkUrl = "https://www.upwork.com/freelancers/~017c0f9f0d7677c477";
 ---
+
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link
+      rel="icon"
+      href="/logo/favicon.ico"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/logo/favicon.ico"
+      media="(prefers-color-scheme: dark)"
+    />
   </head>
   <body class="bg-bg text-text antialiased flex flex-col min-h-screen">
     <!-- Header -->
-<header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
-  <a href="/" class="font-bold text-lg">Viktor Holovin</a>
-  <nav class="flex gap-8 text-sm ml-6">
-    <a class="hover:text-accent" href="/services">Services</a>
-    <a class="hover:text-accent" href="/portfolio">Portfolio</a>
-    <a class="hover:text-accent" href="/contact">Contact</a>
-  </nav>
-</header>
+    <header
+      class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between"
+    >
+      <a href="/" class="font-bold text-lg">Viktor Holovin</a>
+      <nav class="flex gap-8 text-sm ml-6">
+        <a class="hover:text-accent" href="/services">Services</a>
+        <a class="hover:text-accent" href="/portfolio">Portfolio</a>
+        <a class="hover:text-accent" href="/contact">Contact</a>
+      </nav>
+    </header>
 
     <!-- Main content grows to push footer down -->
     <main class="flex-1 px-4">
@@ -28,7 +44,9 @@ const upworkUrl = "https://www.upwork.com/freelancers/~017c0f9f0d7677c477";
 
     <!-- Footer sticks at the bottom -->
     <footer class="max-w-6xl mx-auto px-4 py-8 text-sm opacity-80">
-      © {new Date().getFullYear()} • <span class="text-accent">Static Site Developer</span> •
+      © {new Date().getFullYear()} • <span class="text-accent"
+        >Static Site Developer</span
+      > •
       <a class="underline hover:text-accent" href="/privacy">Privacy</a>
     </footer>
   </body>

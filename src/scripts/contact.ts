@@ -33,7 +33,6 @@ btn?.addEventListener('click', async () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-      mode: 'cors',
     });
 
     if (res.ok) {

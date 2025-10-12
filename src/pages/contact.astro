@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import contactScriptUrl from "../scripts/contact.ts?url";
 
 const API = `${import.meta.env.PUBLIC_URL}/api/contact`;
 ---
@@ -7,97 +8,25 @@ const API = `${import.meta.env.PUBLIC_URL}/api/contact`;
 <BaseLayout title="Contact">
   <section class="prose prose-invert max-w-3xl mx-auto py-14">
     <h1>Contact</h1>
-    <p>
-      You can email me at
-      <a class="underline" href="mailto:viktor@holovin.com">viktor@holovin.com</a>
-      or use the form below:
-    </p>
+    <p>Or email me at <a class="underline" href="mailto:viktor@holovin.com">viktor@holovin.com</a>.</p>
 
-    <form
-      id="contactForm"
-      method="POST"
-      action={API}
-      class="not-prose mt-6 flex flex-col gap-4 max-w-md"
-    >
-      <input
-        name="name"
-        required
-        placeholder="Your name"
-        autocomplete="name"
-        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-      />
-      <input
-        type="email"
-        name="email"
-        required
-        placeholder="Your email"
-        autocomplete="email"
-        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-      />
-      <textarea
-        name="message"
-        rows="5"
-        required
-        placeholder="Your message"
-        class="rounded-lg bg-white/5 px-4 py-2 border border-white/20 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-      ></textarea>
+    <form id="contactForm" class="not-prose mt-6 flex flex-col gap-4 max-w-md" novalidate data-api={API}>
+      <input name="name" required placeholder="Your name"
+             class="rounded-lg bg-white/5 px-4 py-2 border border-white/20" />
+      <input type="email" name="email" required placeholder="Your email"
+             class="rounded-lg bg-white/5 px-4 py-2 border border-white/20" />
+      <textarea name="message" rows="5" required placeholder="Your message"
+                class="rounded-lg bg-white/5 px-4 py-2 border border-white/20"></textarea>
 
-      <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+      <input type="text" name="company" class="hidden" autocomplete="off" />
 
-      <button
-        type="submit"
-        class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium hover:opacity-90 transition"
-      >
+      <button id="sendBtn" type="button"
+        class="rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-white font-medium">
         Send
       </button>
-
       <p id="status" class="text-sm opacity-80 min-h-[1.5em]"></p>
-      <noscript>
-        <p class="text-xs opacity-70">
-          JavaScript is disabled. After submitting you may see a raw API response.
-        </p>
-      </noscript>
     </form>
 
-    <script is:inline>
-      const API = {JSON.stringify(API)};
-      const form = document.getElementById('contactForm');
-      const statusEl = document.getElementById('status');
-
-      form?.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (!form || !statusEl) return;
-
-        statusEl.textContent = 'Sending…';
-        statusEl.style.color = '';
-
-        const payload = Object.fromEntries(new FormData(form));
-
-        try {
-          const res = await fetch(API, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-
-          if (res.ok) {
-            form.reset();
-            statusEl.textContent = '✅ Message sent! I’ll reply soon.';
-            statusEl.style.color = '#4ade80'; // green
-          } else {
-            let msg = 'Please try again.';
-            try {
-              const data = await res.json();
-              if (data?.error) msg = data.error;
-            } catch {}
-            statusEl.textContent = '❌ Failed: ' + msg;
-            statusEl.style.color = '#f87171'; // red
-          }
-        } catch {
-          statusEl.textContent = '⚠️ Network error. Please try again.';
-          statusEl.style.color = '#facc15'; // yellow
-        }
-      });
-    </script>
+    <script type="module" src={contactScriptUrl}></script>
   </section>
 </BaseLayout>

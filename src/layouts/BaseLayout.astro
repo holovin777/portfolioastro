@@ -1,7 +1,6 @@
 ---
-// src/layouts/BaseLayout.astro
 import "../styles/global.css";
-import { ClientRouter, ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 const {
   title = "Static Site Developer",
@@ -17,17 +16,16 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Favicon -->
     <link rel="icon" href="/logo/favicon.ico" />
 
-    <!-- Увімкнути SPA + fallback-и та стилі переходів -->
-    <ClientRouter />
-    <ViewTransitions />
+    <ClientRouter fallback="none" />
   </head>
 
   <body class="bg-bg text-text antialiased flex flex-col min-h-screen">
-    <!-- Header збережеться між навігаціями -->
-    <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between" transition:persist>
+    <header
+      class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between"
+      transition:persist
+    >
       <a href="/" class="font-bold text-lg">Viktor Holovin</a>
       <nav class="flex gap-8 text-sm ml-6">
         <a class="hover:text-accent" href="/services">Services</a>
@@ -36,12 +34,10 @@ const {
       </nav>
     </header>
 
-    <!-- Головний контент з плавним слайдом -->
-    <main class="flex-1 px-4" transition:animate="slide">
+    <main class="flex-1 px-4">
       <slot />
     </main>
 
-    <!-- Footer внизу -->
     <footer class="max-w-6xl mx-auto px-4 py-8 text-sm opacity-80">
       © {new Date().getFullYear()} • <span class="text-accent">Static Site Developer</span> •
       <a class="underline hover:text-accent" href="/privacy">Privacy</a>

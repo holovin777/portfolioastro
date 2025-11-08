@@ -1,5 +1,8 @@
 ---
+// src/layouts/BaseLayout.astro
 import "../styles/global.css";
+import { ClientRouter, ViewTransitions } from "astro:transitions";
+
 const {
   title = "Static Site Developer",
   description = "Fast. Secure. SEO-ready.",
@@ -10,24 +13,21 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link
-      rel="icon"
-      href="/logo/favicon.ico"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="icon"
-      href="/logo/favicon.ico"
-      media="(prefers-color-scheme: dark)"
-    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/logo/favicon.ico" />
+
+    <!-- Увімкнути SPA + fallback-и та стилі переходів -->
+    <ClientRouter />
+    <ViewTransitions />
   </head>
+
   <body class="bg-bg text-text antialiased flex flex-col min-h-screen">
-    <!-- Header -->
-    <header
-      class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between"
-    >
+    <!-- Header збережеться між навігаціями -->
+    <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between" transition:persist>
       <a href="/" class="font-bold text-lg">Viktor Holovin</a>
       <nav class="flex gap-8 text-sm ml-6">
         <a class="hover:text-accent" href="/services">Services</a>
@@ -36,16 +36,14 @@ const {
       </nav>
     </header>
 
-    <!-- Main content grows to push footer down -->
-    <main class="flex-1 px-4">
+    <!-- Головний контент з плавним слайдом -->
+    <main class="flex-1 px-4" transition:animate="slide">
       <slot />
     </main>
 
-    <!-- Footer sticks at the bottom -->
+    <!-- Footer внизу -->
     <footer class="max-w-6xl mx-auto px-4 py-8 text-sm opacity-80">
-      © {new Date().getFullYear()} • <span class="text-accent"
-        >Static Site Developer</span
-      > •
+      © {new Date().getFullYear()} • <span class="text-accent">Static Site Developer</span> •
       <a class="underline hover:text-accent" href="/privacy">Privacy</a>
     </footer>
   </body>

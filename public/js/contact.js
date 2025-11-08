@@ -1,58 +1,62 @@
-function qs(sel, root = document) {
-  return root.querySelector(sel);
+function qs(sel, root = document) { return root.querySelector(sel); }
+
+function setStatus(el, msg, color = '') {
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = color || '';
 }
 
-const form = qs('#contactForm');
-const btn = qs('#sendBtn');
-const statusEl = qs('#status');
+function bindContactForm() {
+  const form = qs('#contactForm');
+  if (!form || form.dataset.bound === '1') return;
 
-const API = form && form.dataset.api ? form.dataset.api : '';
+  const statusEl = qs('#status', form);
+  const API = form.dataset.api || '/api/contact';
 
-function setStatus(msg, color = '') {
-  if (!statusEl) return;
-  statusEl.textContent = msg;
-  statusEl.style.color = color;
-}
-
-if (btn) {
-  btn.addEventListener('click', async () => {
-    if (!form || !API) return;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
     const data = Object.fromEntries(new FormData(form));
+    const { name = '', email = '', message = '', company = '' } = data;
 
-    if (!data.name || !data.email || !data.email.includes('@') || !data.message) {
-      setStatus('Please fill name, valid email, and message.', '#f87171');
+    if (!name.trim() || !email.includes('@') || !message.trim()) {
+      setStatus(statusEl, 'Please fill name, valid email, and message.', '#f87171');
       return;
     }
-    if (data.company) {
-      setStatus('Spam blocked.', '#f87171');
+    if (company) { // honeypot
+      setStatus(statusEl, 'Spam blocked.', '#f87171');
       return;
     }
 
-    btn.disabled = true;
-    setStatus('Sending…');
+    setStatus(statusEl, 'Sending…');
 
     try {
       const res = await fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ name, email, message, company })
       });
 
       if (res.ok) {
         form.reset();
-        setStatus('✅ Message sent! I’ll reply soon.', '#4ade80');
+        setStatus(statusEl, '✅ Message sent! I’ll reply soon.', '#4ade80');
       } else {
         let body = {};
-        try {
-          body = await res.json();
-        } catch (e) {}
-        setStatus('❌ ' + (body.error || 'Failed. Please try again.'), '#f87171');
+        try { body = await res.json(); } catch {}
+        setStatus(statusEl, '❌ ' + (body.error || 'Failed. Please try again.'), '#f87171');
       }
-    } catch (e) {
-      setStatus('⚠️ Network error. Please try again.', '#facc15');
-    } finally {
-      btn.disabled = false;
+    } catch {
+      setStatus(statusEl, '⚠️ Network error. Please try again.', '#facc15');
     }
   });
+
+  form.dataset.bound = '1';
 }
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bindContactForm);
+} else {
+  bindContactForm();
+}
+
+document.addEventListener('astro:page-load', bindContactForm);

@@ -9,6 +9,14 @@ const {
 
 const site = "https://www.holovin.com";
 const socialImage = "/logo/social-preview.png";
+
+const SOCIAL = {
+  instagram: "https://instagram.com/holovin777",
+  facebook:  "https://facebook.com/holovin777",
+  twitter:   "https://twitter.com/holovin777",
+  telegram:  "https://t.me/holovin",
+  whatsapp:  "https://wa.me/393339616598",
+};
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -64,10 +72,57 @@ const socialImage = "/logo/social-preview.png";
     </main>
 
     <!-- Footer -->
-    <footer class="max-w-6xl mx-auto px-4 py-8 text-sm opacity-80 text-center sm:text-left">
-      © {new Date().getFullYear()} • 
-      <span class="text-accent font-semibold">Static Site Developer</span> •
-      <a class="hover-line" href="/privacy">Privacy</a>
+    <footer class="max-w-6xl mx-auto px-4 py-8 text-sm opacity-80">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-center sm:text-left">
+          © {new Date().getFullYear()} • 
+          <span class="text-accent font-semibold">Static Site Developer</span> •
+          <a class="hover-line" href="/privacy">Privacy</a>
+        </p>
+
+        <!-- Social links -->
+        <div class="flex justify-center sm:justify-end gap-4">
+          <!-- Instagram -->
+          <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer"
+             aria-label="Instagram" class="opacity-80 hover:opacity-100 transition">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 .001 6.001A3 3 0 0 0 12 9zm4.9-2.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer"
+             aria-label="Facebook" class="opacity-80 hover:opacity-100 transition">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.5V12h2.5V9.7c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9H13v7A10 10 0 0 0 22 12z"/>
+            </svg>
+          </a>
+
+          <!-- X / Twitter -->
+          <a href={SOCIAL.twitter} target="_blank" rel="noopener noreferrer"
+             aria-label="Twitter (X)" class="opacity-80 hover:opacity-100 transition">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M18.9 2H22l-7 8.1 8.2 11.9H16l-5-6.6L4.9 22H2l7.5-8.7L1.6 2H8l4.5 6 6.4-6zM16 20h1.9L8.2 4H6.2L16 20z"/>
+            </svg>
+          </a>
+
+          <!-- Telegram -->
+          <a href={SOCIAL.telegram} target="_blank" rel="noopener noreferrer"
+             aria-label="Telegram" class="opacity-80 hover:opacity-100 transition">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M9.9 14.7l-.2 3.7c.5 0 .8-.2 1.1-.5l2.9-2.7 6 4.3c1.1.6 2 .3 2.2-1l4-18.6c.3-1.6-.6-2.2-1.7-1.8L2.2 8.7c-1.5.6-1.5 1.4-.3 1.8l6.3 2 11.6-7.7c.6-.4 1.1-.2.7.2l-10.6 9.7z"/>
+            </svg>
+          </a>
+
+          <!-- WhatsApp -->
+          <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer"
+             aria-label="WhatsApp" class="opacity-80 hover:opacity-100 transition">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true">
+              <path d="M20 3.4A10 10 0 0 0 3.4 20L2 24l4-1.4A10 10 0 1 0 20 3.4zM12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18zm4.1-6.6c-.2-.1-1.2-.7-1.4-.8s-.3-.1-.5.1l-.8.9c-.1.1-.2.2-.5.1-.2-.1-.9-.4-1.6-1.1-.6-.6-1.1-1.3-1.2-1.5-.1-.2 0-.3.1-.5l.5-.5c.1-.2.1-.3 0-.5s-.8-2-1.1-2.7c-.3-.7-.6-.6-.8-.6h-.6c-.2 0-.5.1-.8.3-.3.3-1 .9-1 2.3s1.1 2.6 1.2 2.8c.2.3 2.2 3.4 5.2 4.7 3.1 1.3 3.8.9 4.4.9.7 0 2.1-.9 2.4-1.7.3-.8.3-1.5.2-1.7-.2-.2-.3-.2-.6-.3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
     </footer>
 
     <script type="module" src="/js/parallax.js"></script>

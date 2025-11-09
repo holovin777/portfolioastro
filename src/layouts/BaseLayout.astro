@@ -6,6 +6,9 @@ const {
   title = "Static Site Developer",
   description = "Fast. Secure. SEO-ready.",
 } = Astro.props;
+
+const site = "https://www.holovin.com";
+const socialImage = "/logo/social-preview.png"; // створимо нижче
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -15,9 +18,21 @@ const {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-
     <link rel="icon" href="/logo/favicon.ico" />
+    <link rel="canonical" href={site + Astro.url.pathname} />
 
+    <!-- SEO / Social (п.5) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={site + Astro.url.pathname} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <!-- SPA без анімацій (ти так і хотів): -->
     <ClientRouter fallback="none" />
   </head>
 
@@ -27,11 +42,11 @@ const {
       class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between"
       transition:persist
     >
-      <!-- Logo -->
-      <a href="/" 
-         class="flex items-center gap-2 group select-none"
-         aria-label="Go to home">
-        <span class="font-mono text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300 ease-out">
+      <!-- Logo (п.1, + п.4 клас для паралаксу) -->
+      <a href="/" class="flex items-center gap-2 group select-none" aria-label="Go to home">
+        <span class="logo-parallax font-mono text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600
+                     bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300 ease-out
+                     drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]">
           {'{'}h{'}'}
         </span>
         <span class="hidden sm:inline text-sm font-semibold opacity-70 group-hover:opacity-100 transition-opacity">
@@ -39,11 +54,11 @@ const {
         </span>
       </a>
 
-      <!-- Navigation -->
+      <!-- Navigation з лінією підсвічування (п.2) -->
       <nav class="flex gap-8 text-sm ml-6">
-        <a class="hover:text-accent transition-colors" href="/services">Services</a>
-        <a class="hover:text-accent transition-colors" href="/portfolio">Portfolio</a>
-        <a class="hover:text-accent transition-colors" href="/contact">Contact</a>
+        <a class="hover-line" href="/services">Services</a>
+        <a class="hover-line" href="/portfolio">Portfolio</a>
+        <a class="hover-line" href="/contact">Contact</a>
       </nav>
     </header>
 
@@ -56,7 +71,10 @@ const {
     <footer class="max-w-6xl mx-auto px-4 py-8 text-sm opacity-80 text-center sm:text-left">
       © {new Date().getFullYear()} • 
       <span class="text-accent font-semibold">Static Site Developer</span> •
-      <a class="underline hover:text-accent transition-colors" href="/privacy">Privacy</a>
+      <a class="hover-line" href="/privacy">Privacy</a>
     </footer>
+
+    <!-- Паралакс лого (п.4) -->
+    <script type="module" src="/js/parallax.js"></script>
   </body>
 </html>

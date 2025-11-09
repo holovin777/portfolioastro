@@ -1,27 +1,55 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Services — Static Site Development";
 ---
-<BaseLayout title="Services — Static Site Development">
-  <section class="prose prose-invert max-w-4xl mx-auto py-20">
-    <h1 class="mb-8 text-3xl font-bold">Services</h1>
 
-    <ul class="space-y-6">
-      <li>
-        <strong>Static Site Development</strong><br />
-        I build ultra-fast websites using modern frameworks such as <strong>Astro</strong>, <strong>Hugo</strong>, <strong>Next.js</strong>, and <strong>Qwik</strong>.
-      </li>
-      <li>
-        <strong>API Integrations</strong><br />
-        I connect your backend services (Java, Python, Node, etc.) to your website with clean and secure integrations.
-      </li>
-      <li>
-        <strong>SEO & Performance</strong><br />
-        Every site is optimized for Core Web Vitals, mobile-first design, and structured metadata.
-      </li>
-      <li>
-        <strong>Design to Code</strong><br />
-        From Figma or Photoshop, I transform your design into a responsive, accessible website.
-      </li>
-    </ul>
+<BaseLayout {title}>
+  <section class="max-w-6xl mx-auto px-4 py-20">
+    <h1 class="mb-2 text-3xl md:text-4xl font-extrabold">Services</h1>
+    <p class="opacity-80 max-w-2xl">Pick a package or ask for a custom quote.</p>
+
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <!-- Starter -->
+      <div class="rounded-2xl border border-white/15 bg-white/5 p-6">
+        <h3 class="text-xl font-semibold">Starter</h3>
+        <p class="mt-1 text-sm opacity-80">One-page landing, fast launch.</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li>• Static site + Tailwind</li>
+          <li>• Mobile-first, SEO meta</li>
+          <li>• Contact form & spam guard</li>
+          <li>• Deploy & CDN</li>
+        </ul>
+        <p class="mt-6 text-2xl font-bold">from €399</p>
+        <a href="/contact" class="mt-4 inline-block rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-2.5 font-medium text-white hover:opacity-90 transition">Get started</a>
+      </div>
+
+      <!-- Plus -->
+      <div class="rounded-2xl border border-white/15 bg-white/5 p-6">
+        <h3 class="text-xl font-semibold">Plus</h3>
+        <p class="mt-1 text-sm opacity-80">Multi-page site, blog/docs.</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li>• Up to 6 pages + blog</li>
+          <li>• Schema, OG/Twitter cards</li>
+          <li>• Basic analytics</li>
+          <li>• Forms + email delivery</li>
+        </ul>
+        <p class="mt-6 text-2xl font-bold">from €990</p>
+        <a href="/contact" class="mt-4 inline-block rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-2.5 font-medium text-white hover:opacity-90 transition">Request quote</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="rounded-2xl border border-white/15 bg-white/5 p-6">
+        <h3 class="text-xl font-semibold">Pro</h3>
+        <p class="mt-1 text-sm opacity-80">Custom UI + API integration.</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li>• Custom components & animations</li>
+          <li>• API (Java/Python/Node) integration</li>
+          <li>• CI/CD, staging → production</li>
+          <li>• Performance budget & monitoring</li>
+        </ul>
+        <p class="mt-6 text-2xl font-bold">custom</p>
+        <a href="/contact" class="mt-4 inline-block rounded-lg border border-white/20 px-5 py-2.5 font-medium hover:border-white/40 hover:text-accent transition">Discuss project</a>
+      </div>
+    </div>
   </section>
 </BaseLayout>

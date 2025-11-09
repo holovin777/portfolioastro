@@ -1,100 +1,56 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const projects = [
-  {
-    title: "Veronica cartoons",
-    desc: "Astro frontend website.",
-    stack: ["Astro", "Static"],
-    href: "https://www.veronicartoons.com",
-  },
-  {
-    title: "La Magia dei Colori",
-    desc: "Website with Spring Boot backend and Qwik frontend.",
-    stack: ["Spring Boot", "Qwik"],
-    href: "https://lamagiadeicolori.com",
-  },
-  {
-    title: "InnoMarts — Personal Blog",
-    desc: "Fast Hugo blog with multi-language content and fun courses.",
-    stack: ["Hugo", "Markdown", "SEO"],
-    href: "https://www.innomarts.com",
-  },
-  {
-    title: "Personal Portfolio",
-    desc: "Portfolio powered by Java endpoints.",
-    stack: ["Java", "APIs", "Frontend"],
-    href: "https://www.holovin.com",
-  },
-  {
-    title: "GitHub Blog",
-    desc: "Developer notes and posts on a separate blog.",
-    stack: ["Qwik", "GitHub"],
-    href: "https://blog.holovin.com",
-  },
-  {
-    title: "Italiano con Geoff",
-    desc: "Italian for English speakers — lightweight learning site.",
-    stack: ["Vercel", "Static", "Hugo"],
-    href: "https://italianocongeoff.vercel.app/",
-  },
-  {
-    title: "Chronark Portfolio",
-    desc: "Another portfolio variant built for fast iteration.",
-    stack: ["Vercel", "Next"],
-    href: "https://portfoliochronark.vercel.app",
-  },
-  {
-    title: "Curriculum Portfolio",
-    desc: "Clean résumé/portfolio site.",
-    stack: ["Vercel", "Static", "Qwik"],
-    href: "https://curriculum-two-gamma.vercel.app/",
-  },
-  {
-    title: "Cucina",
-    desc: "Simple kitchen website (recipes / personal project).",
-    stack: ["Vercel", "Static", "Qwik"],
-    href: "https://cucina.vercel.app/",
-  },
-{
-  title: "PortfolioSpring API",
-  desc: "Java Spring Boot backend with customer & portfolio endpoints.",
-  stack: ["Java", "Spring Boot", "REST API"],
-  href: "/portfolio/java-buildtime", // internal route ✅
-}
+type Project = {
+  title: string;
+  desc: string;
+  stack: string[];
+  href: string;
+};
+
+const projects: Project[] = [
+  { title: "Veronica cartoons", desc: "Astro frontend website.", stack: ["Astro", "Static"], href: "https://www.veronicartoons.com" },
+  { title: "La Magia dei Colori", desc: "Spring Boot backend + Qwik frontend.", stack: ["Spring Boot", "Qwik"], href: "https://lamagiadeicolori.com" },
+  { title: "InnoMarts — Blog", desc: "Fast Hugo blog, multilingual.", stack: ["Hugo", "SEO"], href: "https://www.innomarts.com" },
+  { title: "Personal Portfolio", desc: "Portfolio powered by Java endpoints.", stack: ["Java", "APIs"], href: "https://www.holovin.com" },
+  { title: "GitHub Blog", desc: "Developer notes & posts.", stack: ["Qwik", "GitHub"], href: "https://blog.holovin.com" },
+  { title: "Italiano con Geoff", desc: "Lightweight learning site.", stack: ["Hugo", "Vercel"], href: "https://italianocongeoff.vercel.app/" },
+  { title: "Chronark Portfolio", desc: "Portfolio variant for fast iteration.", stack: ["Next", "Vercel"], href: "https://portfoliochronark.vercel.app" },
+  { title: "Curriculum Portfolio", desc: "Clean résumé/portfolio site.", stack: ["Qwik", "Vercel"], href: "https://curriculum-two-gamma.vercel.app/" },
+  { title: "Cucina", desc: "Simple recipes site.", stack: ["Qwik", "Static"], href: "https://cucina.vercel.app/" },
+  { title: "PortfolioSpring API", desc: "Java Spring Boot REST endpoints.", stack: ["Java", "Spring Boot", "REST"], href: "/portfolio/java-buildtime" }, // internal
 ];
+
+function isExternal(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://");
+}
 ---
 
 <BaseLayout title="Portfolio — Selected Work">
-  <section class="max-w-6xl mx-auto py-20">
+  <section class="max-w-6xl mx-auto px-4 py-20">
     <h1 class="text-3xl md:text-4xl font-extrabold">Selected Work</h1>
-    <p class="mt-3 opacity-80 max-w-2xl">
-      Live projects and personal sites I’ve built or maintain.
-    </p>
+    <p class="mt-3 opacity-80 max-w-2xl">Live projects and personal sites I’ve built or maintain.</p>
 
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map((p) => (
-        <a
-          href={p.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group block rounded-2xl border border-white/15 bg-white/5 p-5 hover:border-white/30 hover:bg-white/10 transition"
-        >
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="font-semibold text-lg">{p.title}</h3>
-            <svg class="size-4 opacity-70 group-hover:opacity-100 transition" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 14v4.2A1.8 1.8 0 0 1 18.2 20H6.8A1.8 1.8 0 0 1 5 18.2V6.8A1.8 1.8 0 0 1 6.8 5H11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <p class="mt-2 text-sm opacity-80">{p.desc}</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {p.stack.map((s) => (
-              <span class="rounded-full bg-white/10 px-2.5 py-1 text-xs opacity-90">{s}</span>
-            ))}
-          </div>
-        </a>
-      ))}
+      {projects.map((p) => {
+        const external = isExternal(p.href);
+        const attrs = external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+        return (
+          <a href={p.href} {...attrs} class="group block rounded-2xl border border-white/15 bg-white/5 p-5 hover:border-white/30 hover:bg-white/10 transition min-h-[180px]">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="font-semibold text-lg">{p.title}</h3>
+              <svg class="size-4 opacity-70 group-hover:opacity-100 transition" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 4h6m0 0v6m0-6L10 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 14v4.2A1.8 1.8 0 0 1 18.2 20H6.8A1.8 1.8 0 0 1 5 18.2V6.8A1.8 1.8 0 0 1 6.8 5H11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="mt-2 text-sm opacity-85">{p.desc}</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {p.stack.map((s) => <span class="rounded-full bg-white/10 px-2.5 py-1 text-xs">{s}</span>)}
+            </div>
+          </a>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>

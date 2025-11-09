@@ -8,7 +8,7 @@ const {
 } = Astro.props;
 
 const site = "https://www.holovin.com";
-const socialImage = "/logo/social-preview.png"; // створимо нижче
+const socialImage = "/logo/social-preview.png";
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -21,7 +21,6 @@ const socialImage = "/logo/social-preview.png"; // створимо нижче
     <link rel="icon" href="/logo/favicon.ico" />
     <link rel="canonical" href={site + Astro.url.pathname} />
 
-    <!-- SEO / Social (п.5) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={site + Astro.url.pathname} />
     <meta property="og:title" content={title} />
@@ -32,7 +31,6 @@ const socialImage = "/logo/social-preview.png"; // створимо нижче
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
 
-    <!-- SPA без анімацій (ти так і хотів): -->
     <ClientRouter fallback="none" />
   </head>
 
@@ -42,7 +40,6 @@ const socialImage = "/logo/social-preview.png"; // створимо нижче
       class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between"
       transition:persist
     >
-      <!-- Logo (п.1, + п.4 клас для паралаксу) -->
       <a href="/" class="flex items-center gap-2 group select-none" aria-label="Go to home">
         <span class="logo-parallax font-mono text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600
                      bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300 ease-out
@@ -54,7 +51,6 @@ const socialImage = "/logo/social-preview.png"; // створимо нижче
         </span>
       </a>
 
-      <!-- Navigation з лінією підсвічування (п.2) -->
       <nav class="flex gap-8 text-sm ml-6">
         <a class="hover-line" href="/services">Services</a>
         <a class="hover-line" href="/portfolio">Portfolio</a>
@@ -74,7 +70,6 @@ const socialImage = "/logo/social-preview.png"; // створимо нижче
       <a class="hover-line" href="/privacy">Privacy</a>
     </footer>
 
-    <!-- Паралакс лого (п.4) -->
     <script type="module" src="/js/parallax.js"></script>
   </body>
 </html>

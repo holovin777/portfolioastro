@@ -1,47 +1,48 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Static Site Developer — Viktor Holovin";
+const description = "Ultra-fast sites. Clean code, secure by default, SEO-ready.";
 ---
 
-<BaseLayout title="Static Site Developer — Viktor Holovin" description="I build ultra-fast static websites with Astro.">
-  <!-- Hero -->
-  <section class="max-w-6xl mx-auto py-20 md:py-28">
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
-      Static Site Developer — <span class="text-accent">Fast</span>. Secure. SEO-Ready.
-    </h1>
+<BaseLayout {title} {description}>
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <div class="absolute -top-24 -right-24 h-72 w-72 rounded-full blur-3xl opacity-30 bg-indigo-600/40"></div>
+      <div class="absolute -bottom-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-25 bg-purple-600/40"></div>
+    </div>
 
-    <p class="mt-4 text-lg md:text-2xl/relaxed opacity-90 max-w-3xl">
-I build ultra-fast static websites, integrate APIs, and deliver clean, professional experiences that convert.
-    </p>
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <p class="text-xs uppercase tracking-widest text-accent/80 mb-3">⚡ Fast • 🔒 Secure • 🔍 SEO</p>
 
-<div class="not-prose mt-10 flex flex-wrap gap-4">
-  <!-- Upwork -->
-  <a
-    href="https://www.upwork.com/freelancers/~017c0f9f0d7677c477"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="inline-block rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-base font-medium text-white hover:opacity-90 transition"
-  >
-    Hire me on Upwork
-  </a>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+        Static Site Developer — <span class="text-accent">Fast</span>. Secure. SEO-Ready.
+      </h1>
 
-  <!-- Fiverr -->
-<a
-  href="https://www.fiverr.com/holovin777"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="inline-block rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-3 text-base font-medium text-white hover:opacity-90 transition"
->
-  Hire me on Fiverr
-</a>
+      <p class="mt-4 text-lg md:text-2xl/relaxed opacity-90 max-w-3xl">
+        I build ultra-fast static websites, integrate APIs, and deliver clean, professional experiences that convert.
+      </p>
 
-  <!-- Portfolio -->
-  <a
-    href="/portfolio"
-    class="inline-block rounded-lg border border-white/20 px-6 py-3 text-base font-medium text-text hover:border-white/40 hover:text-accent transition"
-  >
-    See portfolio
-  </a>
-</div>
+      <ul class="mt-6 grid gap-2 text-white/85 max-w-2xl">
+        <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span>Green Core Web Vitals by default</li>
+        <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span>Static site + Tailwind + CDN setup</li>
+        <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-accent"></span>Contact forms, analytics, deploy & care</li>
+      </ul>
 
+      <div class="mt-8 flex flex-wrap gap-4 not-prose">
+        <a href="/contact" class="inline-block rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-base font-medium text-white hover:opacity-90 transition">
+          Hire me
+        </a>
+        <a href="/portfolio" class="inline-block rounded-lg border border-white/20 px-6 py-3 text-base font-medium hover:border-white/40 hover:text-accent transition">
+          See work
+        </a>
+      </div>
+
+      <p class="mt-6 text-sm text-white/60">
+        Also on
+        <a class="underline hover:text-accent" href="https://www.upwork.com/freelancers/~017c0f9f0d7677c477" target="_blank" rel="noopener noreferrer">Upwork</a>
+        &nbsp;and&nbsp;
+        <a class="underline hover:text-accent" href="https://www.fiverr.com/holovin777" target="_blank" rel="noopener noreferrer">Fiverr</a>.
+      </p>
+    </div>
   </section>
 </BaseLayout>

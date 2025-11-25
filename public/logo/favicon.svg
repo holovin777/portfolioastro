@@ -7,20 +7,39 @@
    viewBox="0 0 270.9333 270.9333"
    version="1.1"
    id="svg1"
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="icon256.png"
+   inkscape:export-xdpi="24.000004"
+   inkscape:export-ydpi="24.000004"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:export-bgcolor="#ffffff00"
+     inkscape:zoom="0.75292978"
+     inkscape:cx="511.33587"
+     inkscape:cy="511.99994"
+     inkscape:window-width="1920"
+     inkscape:window-height="1003"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
   <defs
      id="defs1" />
   <g
      id="layer1"
      transform="translate(-29.401294,-18.710944)">
-    <rect
-       style="fill:#000000;stroke-width:0.264583"
-       id="rect1"
-       width="270.93332"
-       height="270.93332"
-       x="29.401295"
-       y="18.710943" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180.994px;line-height:0;font-family:Monospace;-inkscape-font-specification:Monospace;text-align:start;letter-spacing:-18.9203px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#39ff14;fill-opacity:1;stroke-width:0.943;stroke-dasharray:none"
